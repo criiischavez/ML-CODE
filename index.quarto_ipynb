@@ -1,0 +1,175 @@
+{
+  "cells": [
+    {
+      "cell_type": "raw",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: 'Mi primer reporte en Quart'\n",
+        "author: 'Cristina Chavez'\n",
+        "date: '25-09-2025'\n",
+        "format:\n",
+        "    html:\n",
+        "        embed-resources: true\n",
+        "engine: jupyter\n",
+        "---"
+      ],
+      "id": "83e3db17"
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Grettings\n",
+        "\n",
+        "## I'm here\n",
+        "\n",
+        "### Alo"
+      ],
+      "id": "dd2fb6c2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import altair as alt\n",
+        "from vega_datasets import data\n",
+        "\n",
+        "cars = data.cars()\n",
+        "print(cars.head())"
+      ],
+      "id": "52786a69",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## segundo punto"
+      ],
+      "id": "de728cf0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "alt.Chart(cars).mark_point().encode(\n",
+        "    x=\"Miles_per_Gallon\",\n",
+        "    y=\"Horsepower\",\n",
+        "    tooltip=[\"Name\",\"Origin\",\"Miles_per_Gallon\",\"Horsepower\"]\n",
+        ").interactive()"
+      ],
+      "id": "3c98a79e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Scatter plot with color \n"
+      ],
+      "id": "d52a4ceb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "alt.Chart(cars).mark_point(filled=True).encode(\n",
+        "    x=\"Miles_per_Gallon\",\n",
+        "    y=\"Horsepower\",\n",
+        "    color=\"Origin\",\n",
+        "    tooltip=[\"Name\", \"Origin\", \"Miles_per_Gallon\", \"Horsepower\"]\n",
+        ").interactive()"
+      ],
+      "id": "1c6d2dce",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Agregaciones con respecto a un grafico de barras\n",
+        "\n",
+        "\n",
+        "Numero de observaciones "
+      ],
+      "id": "e468b037"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "alt.Chart(cars).mark_bar().encode(\n",
+        "    x=\"Origin\",\n",
+        "    y=\"count()\"\n",
+        ")"
+      ],
+      "id": "7bd75ec4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Grafico lineal\n",
+        "\n",
+        "Valor especifico sin mean"
+      ],
+      "id": "4027910d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "alt.Chart(cars).mark_line().encode(\n",
+        "    alt.X('Year'),\n",
+        "    alt.Y('Weight_in_lbs'),\n",
+        "    alt.Color('Origin')\n",
+        ").properties(\n",
+        "    width=600\n",
+        ").interactive()"
+      ],
+      "id": "053e7e89",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Valor especifico con mean"
+      ],
+      "id": "0dff094f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "alt.Chart(cars).mark_line(point=True).encode(\n",
+        "    alt.X('Year'),\n",
+        "    alt.Y('mean(Weight_in_lbs)'),\n",
+        "    alt.Color('Origin')\n",
+        ").properties(\n",
+        "    width=600\n",
+        ").interactive() "
+      ],
+      "id": "60e904db",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "D:\\0 MIA\\II APRENDIZAJE DE MAQUINA\\ML CODE\\mlvenv\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
