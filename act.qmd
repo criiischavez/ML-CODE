@@ -8,4 +8,115 @@ format:
     df-print: paged
 ---
 
-3
+# Laboratorio 1
+
+Se realiza el analisis de la base de datos de Base estadística de matrícula de UEP 2015 - 2023 que contiene los siguientes datos. 
+
+- AÑO
+- NOMBRE_IES
+- TIPO_FINANCIAMIENTO
+- NOMBRE_cARRERA
+- MODALIDAD
+- CAMPO_AMPLIO
+- CAMPO_ESPECIFICO
+- CAMPO_DETALLADO
+- TIPO_SEDE
+- PROVINCIA_SEDE
+- CANTON_SEDE
+- SEXO
+- ETNIA
+- PUEBLOS_NACIONALIDAD
+- DISCAPACIDAD
+- PROVINCIA_RESIDENCIA
+- CANTON_RESIDENCIA 
+- TOTAL
+
+## Leer el data set 
+
+
+```{python}
+import pandas as pd 
+import numpy as np
+import altair as alt 
+%pip install openpyxl
+
+df= pd.read_excel('BEM.xlsx')
+# Normaliza nombre de la 1ª columna (a veces llega con BOM)
+
+df.shape
+df.info
+df.head
+
+```
+### Arreglar el dt
+
+```{python}
+# Normaliza tipos y filtra 2015 si existe la columna AÑO
+for c in ["AÑO","NOMBRE_IES","TIPO_FINANCIAMIENTO","NOMBRE_CARRERA","NIVEL_FORMACIÓN",
+          "MODALIDAD","CAMPO_AMPLIO","CAMPO_ESPECIFICO","CAMPO_DETALLADO","TIPO_SEDE",
+          "PROVINCIA_SEDE","CANTON_SEDE","SEXO","ETNIA","PUEBLOS_NACIONALIDAD",
+          "DISCAPACIDAD","PROVINCIA_RESIDENCIA","CANTON_RESIDENCIA"]:
+    if c in df.columns: df[c] = df[c].astype("string")
+
+if "AÑO" in df.columns:
+    df = df[df["AÑO"] == "2015"]
+
+# Función auxiliar: top N por TOTAL
+def topn(d, by, n=15):
+    tmp = (d.groupby(by, dropna=False)["TOTAL"].sum()
+             .reset_index().sort_values("TOTAL", ascending=False).head(n))
+    return tmp
+```
+
+
+## 1) Top instituciones por número de estudiantes (barra horizontal)
+
+```{python}
+alt.Chart(topn(df, "NOMBRE_IES", 15)).mark_bar().encode(
+    x="TOTAL:Q",
+    y=alt.Y("NOMBRE_IES:N", sort="-x", title="IES"),
+    tooltip=["NOMBRE_IES","TOTAL"]
+).properties(height=500, title="Top 15 IES por TOTAL (2015)")
+```
+
+### carreras con mas estudiantes
+
+```{python}
+base = topn(df, "NOMBRE_CARRERA", 15)
+alt.Chart(base).mark_bar().encode(
+    x="TOTAL:Q",
+    y=alt.Y("NOMBRE_CARRERA:N", sort="-x", title="Carrera"),
+    tooltip=["NOMBRE_CARRERA","TOTAL"]
+).properties(height=600, title="Top 15 carreras")
+
+# Versión apilada por sexo (si hay distribución por sexo)
+alt.Chart(df[df["NOMBRE_CARRERA"].isin(base["NOMBRE_CARRERA"])])\
+    .mark_bar().encode(
+        x="sum(TOTAL):Q",
+        y=alt.Y("NOMBRE_CARRERA:N", sort="-x"),
+        color=alt.Color("SEXO:N"),
+        tooltip=[alt.Tooltip("sum(TOTAL):Q", title="Total")]
+    ).properties(height=600, title="Top 15 carreras – distribución por sexo")
+```
+
+### Financiamiento publico y particular
+
+```{python}
+fin = df.groupby("TIPO_FINANCIAMIENTO")["TOTAL"].sum().reset_index()
+alt.Chart(fin).mark_arc(innerRadius=60).encode(
+    theta="TOTAL:Q",
+    color=alt.Color("TIPO_FINANCIAMIENTO:N", legend=None),
+    tooltip=["TIPO_FINANCIAMIENTO","TOTAL"]
+).properties(title="Participación por tipo de financiamiento (2015)")
+```
+
+### modalidad y nivel de formacion 
+
+```{python}
+alt.Chart(df).mark_bar().encode(
+    x=alt.X("sum(TOTAL):Q", stack="normalize", title="Proporción"),
+    y=alt.Y("NIVEL_FORMACIÓN:N", title="Nivel"),
+    color=alt.Color("MODALIDAD:N"),
+    tooltip=[alt.Tooltip("sum(TOTAL):Q", title="Total")]
+).properties(title="Composición por modalidad dentro de cada nivel")
+```

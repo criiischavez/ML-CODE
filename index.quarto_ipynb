@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "raw",
-   "id": "d07be562",
+   "id": "d7ffc1e5",
    "metadata": {},
    "source": [
     "---\n",
@@ -18,7 +18,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "e738520e",
+   "id": "0ecf2b8e",
    "metadata": {},
    "source": [
     "# Grettings\n",
@@ -31,7 +31,7 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "16094f75",
+   "id": "d8daad53",
    "metadata": {},
    "outputs": [
     {
@@ -64,7 +64,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "7cbf1bc1",
+   "id": "64706a49",
    "metadata": {},
    "source": [
     "## segundo punto"
@@ -73,7 +73,7 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "d959a092",
+   "id": "c5c2c14f",
    "metadata": {},
    "outputs": [
     {
@@ -81,23 +81,23 @@
       "text/html": [
        "\n",
        "<style>\n",
-       "  #altair-viz-6926151d7dfb44fd955f6eb2d8041591.vega-embed {\n",
+       "  #altair-viz-64b9e8988c054f1395d05b12887b8212.vega-embed {\n",
        "    width: 100%;\n",
        "    display: flex;\n",
        "  }\n",
        "\n",
-       "  #altair-viz-6926151d7dfb44fd955f6eb2d8041591.vega-embed details,\n",
-       "  #altair-viz-6926151d7dfb44fd955f6eb2d8041591.vega-embed details summary {\n",
+       "  #altair-viz-64b9e8988c054f1395d05b12887b8212.vega-embed details,\n",
+       "  #altair-viz-64b9e8988c054f1395d05b12887b8212.vega-embed details summary {\n",
        "    position: relative;\n",
        "  }\n",
        "</style>\n",
-       "<div id=\"altair-viz-6926151d7dfb44fd955f6eb2d8041591\"></div>\n",
+       "<div id=\"altair-viz-64b9e8988c054f1395d05b12887b8212\"></div>\n",
        "<script type=\"text/javascript\">\n",
        "  var VEGA_DEBUG = (typeof VEGA_DEBUG == \"undefined\") ? {} : VEGA_DEBUG;\n",
        "  (function(spec, embedOpt){\n",
        "    let outputDiv = document.currentScript.previousElementSibling;\n",
-       "    if (outputDiv.id !== \"altair-viz-6926151d7dfb44fd955f6eb2d8041591\") {\n",
-       "      outputDiv = document.getElementById(\"altair-viz-6926151d7dfb44fd955f6eb2d8041591\");\n",
+       "    if (outputDiv.id !== \"altair-viz-64b9e8988c054f1395d05b12887b8212\") {\n",
+       "      outputDiv = document.getElementById(\"altair-viz-64b9e8988c054f1395d05b12887b8212\");\n",
        "    }\n",
        "\n",
        "    const paths = {\n",
@@ -167,7 +167,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "30885db2",
+   "id": "47d565b6",
    "metadata": {},
    "source": [
     "## Scatter plot with color \n"
@@ -176,7 +176,7 @@
   {
    "cell_type": "code",
    "execution_count": 3,
-   "id": "2b4f15fe",
+   "id": "009d3da6",
    "metadata": {},
    "outputs": [
     {
@@ -184,23 +184,23 @@
       "text/html": [
        "\n",
        "<style>\n",
-       "  #altair-viz-1806231bf46f47909daa96fc7f0fb9fa.vega-embed {\n",
+       "  #altair-viz-77c02bf04c6147a99eeca7df15bf0f48.vega-embed {\n",
        "    width: 100%;\n",
        "    display: flex;\n",
        "  }\n",
        "\n",
-       "  #altair-viz-1806231bf46f47909daa96fc7f0fb9fa.vega-embed details,\n",
-       "  #altair-viz-1806231bf46f47909daa96fc7f0fb9fa.vega-embed details summary {\n",
+       "  #altair-viz-77c02bf04c6147a99eeca7df15bf0f48.vega-embed details,\n",
+       "  #altair-viz-77c02bf04c6147a99eeca7df15bf0f48.vega-embed details summary {\n",
        "    position: relative;\n",
        "  }\n",
        "</style>\n",
-       "<div id=\"altair-viz-1806231bf46f47909daa96fc7f0fb9fa\"></div>\n",
+       "<div id=\"altair-viz-77c02bf04c6147a99eeca7df15bf0f48\"></div>\n",
        "<script type=\"text/javascript\">\n",
        "  var VEGA_DEBUG = (typeof VEGA_DEBUG == \"undefined\") ? {} : VEGA_DEBUG;\n",
        "  (function(spec, embedOpt){\n",
        "    let outputDiv = document.currentScript.previousElementSibling;\n",
-       "    if (outputDiv.id !== \"altair-viz-1806231bf46f47909daa96fc7f0fb9fa\") {\n",
-       "      outputDiv = document.getElementById(\"altair-viz-1806231bf46f47909daa96fc7f0fb9fa\");\n",
+       "    if (outputDiv.id !== \"altair-viz-77c02bf04c6147a99eeca7df15bf0f48\") {\n",
+       "      outputDiv = document.getElementById(\"altair-viz-77c02bf04c6147a99eeca7df15bf0f48\");\n",
        "    }\n",
        "\n",
        "    const paths = {\n",
@@ -271,7 +271,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "3fa092ed",
+   "id": "7ab15b5c",
    "metadata": {},
    "source": [
     "### Agregaciones con respecto a un grafico de barras\n",
@@ -283,7 +283,7 @@
   {
    "cell_type": "code",
    "execution_count": 4,
-   "id": "770b935e",
+   "id": "c14c1a52",
    "metadata": {},
    "outputs": [
     {
@@ -291,23 +291,23 @@
       "text/html": [
        "\n",
        "<style>\n",
-       "  #altair-viz-3a53c408ea4f4e97988ceab390b6cc21.vega-embed {\n",
+       "  #altair-viz-a2322ebedf8e41e6baf20643bfa8094d.vega-embed {\n",
        "    width: 100%;\n",
        "    display: flex;\n",
        "  }\n",
        "\n",
-       "  #altair-viz-3a53c408ea4f4e97988ceab390b6cc21.vega-embed details,\n",
-       "  #altair-viz-3a53c408ea4f4e97988ceab390b6cc21.vega-embed details summary {\n",
+       "  #altair-viz-a2322ebedf8e41e6baf20643bfa8094d.vega-embed details,\n",
+       "  #altair-viz-a2322ebedf8e41e6baf20643bfa8094d.vega-embed details summary {\n",
        "    position: relative;\n",
        "  }\n",
        "</style>\n",
-       "<div id=\"altair-viz-3a53c408ea4f4e97988ceab390b6cc21\"></div>\n",
+       "<div id=\"altair-viz-a2322ebedf8e41e6baf20643bfa8094d\"></div>\n",
        "<script type=\"text/javascript\">\n",
        "  var VEGA_DEBUG = (typeof VEGA_DEBUG == \"undefined\") ? {} : VEGA_DEBUG;\n",
        "  (function(spec, embedOpt){\n",
        "    let outputDiv = document.currentScript.previousElementSibling;\n",
-       "    if (outputDiv.id !== \"altair-viz-3a53c408ea4f4e97988ceab390b6cc21\") {\n",
-       "      outputDiv = document.getElementById(\"altair-viz-3a53c408ea4f4e97988ceab390b6cc21\");\n",
+       "    if (outputDiv.id !== \"altair-viz-a2322ebedf8e41e6baf20643bfa8094d\") {\n",
+       "      outputDiv = document.getElementById(\"altair-viz-a2322ebedf8e41e6baf20643bfa8094d\");\n",
        "    }\n",
        "\n",
        "    const paths = {\n",
@@ -376,7 +376,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "8df7a59b",
+   "id": "77489d83",
    "metadata": {},
    "source": [
     "## Grafico lineal\n",
@@ -387,7 +387,7 @@
   {
    "cell_type": "code",
    "execution_count": 5,
-   "id": "5ba576d4",
+   "id": "964acf32",
    "metadata": {},
    "outputs": [
     {
@@ -395,23 +395,23 @@
       "text/html": [
        "\n",
        "<style>\n",
-       "  #altair-viz-dff194e97da4477b9b163f784d01e176.vega-embed {\n",
+       "  #altair-viz-d21630a30ab442839a07ba37e3e1583b.vega-embed {\n",
        "    width: 100%;\n",
        "    display: flex;\n",
        "  }\n",
        "\n",
-       "  #altair-viz-dff194e97da4477b9b163f784d01e176.vega-embed details,\n",
-       "  #altair-viz-dff194e97da4477b9b163f784d01e176.vega-embed details summary {\n",
+       "  #altair-viz-d21630a30ab442839a07ba37e3e1583b.vega-embed details,\n",
+       "  #altair-viz-d21630a30ab442839a07ba37e3e1583b.vega-embed details summary {\n",
        "    position: relative;\n",
        "  }\n",
        "</style>\n",
-       "<div id=\"altair-viz-dff194e97da4477b9b163f784d01e176\"></div>\n",
+       "<div id=\"altair-viz-d21630a30ab442839a07ba37e3e1583b\"></div>\n",
        "<script type=\"text/javascript\">\n",
        "  var VEGA_DEBUG = (typeof VEGA_DEBUG == \"undefined\") ? {} : VEGA_DEBUG;\n",
        "  (function(spec, embedOpt){\n",
        "    let outputDiv = document.currentScript.previousElementSibling;\n",
-       "    if (outputDiv.id !== \"altair-viz-dff194e97da4477b9b163f784d01e176\") {\n",
-       "      outputDiv = document.getElementById(\"altair-viz-dff194e97da4477b9b163f784d01e176\");\n",
+       "    if (outputDiv.id !== \"altair-viz-d21630a30ab442839a07ba37e3e1583b\") {\n",
+       "      outputDiv = document.getElementById(\"altair-viz-d21630a30ab442839a07ba37e3e1583b\");\n",
        "    }\n",
        "\n",
        "    const paths = {\n",
@@ -483,7 +483,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "ef1a96ee",
+   "id": "ba674122",
    "metadata": {},
    "source": [
     "Valor especifico con mean"
@@ -492,7 +492,7 @@
   {
    "cell_type": "code",
    "execution_count": 6,
-   "id": "850110e2",
+   "id": "cfab465a",
    "metadata": {},
    "outputs": [
     {
@@ -500,23 +500,23 @@
       "text/html": [
        "\n",
        "<style>\n",
-       "  #altair-viz-408408e49d434e4fb08fa6fa54b45279.vega-embed {\n",
+       "  #altair-viz-edeb0c5915df4197b74cf908803add72.vega-embed {\n",
        "    width: 100%;\n",
        "    display: flex;\n",
        "  }\n",
        "\n",
-       "  #altair-viz-408408e49d434e4fb08fa6fa54b45279.vega-embed details,\n",
-       "  #altair-viz-408408e49d434e4fb08fa6fa54b45279.vega-embed details summary {\n",
+       "  #altair-viz-edeb0c5915df4197b74cf908803add72.vega-embed details,\n",
+       "  #altair-viz-edeb0c5915df4197b74cf908803add72.vega-embed details summary {\n",
        "    position: relative;\n",
        "  }\n",
        "</style>\n",
-       "<div id=\"altair-viz-408408e49d434e4fb08fa6fa54b45279\"></div>\n",
+       "<div id=\"altair-viz-edeb0c5915df4197b74cf908803add72\"></div>\n",
        "<script type=\"text/javascript\">\n",
        "  var VEGA_DEBUG = (typeof VEGA_DEBUG == \"undefined\") ? {} : VEGA_DEBUG;\n",
        "  (function(spec, embedOpt){\n",
        "    let outputDiv = document.currentScript.previousElementSibling;\n",
-       "    if (outputDiv.id !== \"altair-viz-408408e49d434e4fb08fa6fa54b45279\") {\n",
-       "      outputDiv = document.getElementById(\"altair-viz-408408e49d434e4fb08fa6fa54b45279\");\n",
+       "    if (outputDiv.id !== \"altair-viz-edeb0c5915df4197b74cf908803add72\") {\n",
+       "      outputDiv = document.getElementById(\"altair-viz-edeb0c5915df4197b74cf908803add72\");\n",
        "    }\n",
        "\n",
        "    const paths = {\n",
