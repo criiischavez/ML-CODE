@@ -19,3 +19,30 @@ from vega_datasets import data
 cars = data.cars()
 print(cars.head())
 ```
+
+## segundo punto
+
+```{python}
+alt.Chart(cars).mark_point().encode(
+    x="Miles_per_Gallon",
+    y="Horsepower",
+    tooltip=["Name","Origin","Miles_per_Gallon","Horsepower"]
+).interactive()
+```
+
+
+## Scatter plot with color 
+
+
+```{python}
+alt.Chart(cars).mark_point(filled=True).encode(
+    x="Miles_per_Gallon",
+    y="Horsepower",
+    color="Origin",
+    tooltip=["Name", "Origin", "Miles_per_Gallon", "Horsepower"]
+).interactive()
+```
+
+```{python}
+
+```
