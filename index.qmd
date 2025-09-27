@@ -43,6 +43,39 @@ alt.Chart(cars).mark_point(filled=True).encode(
 ).interactive()
 ```
 
-```{python}
+### Agregaciones con respecto a un grafico de barras
 
+
+Numero de observaciones 
+
+```{python}
+alt.Chart(cars).mark_bar().encode(
+    x="Origin",
+    y="count()"
+)
+```
+
+## Grafico lineal
+
+Valor especifico sin mean
+```{python}
+alt.Chart(cars).mark_line().encode(
+    alt.X('Year'),
+    alt.Y('Weight_in_lbs'),
+    alt.Color('Origin')
+).properties(
+    width=600
+).interactive()
+```
+
+
+Valor especifico con mean
+```{python}
+alt.Chart(cars).mark_line(point=True).encode(
+    alt.X('Year'),
+    alt.Y('mean(Weight_in_lbs)'),
+    alt.Color('Origin')
+).properties(
+    width=600
+).interactive() 
 ```
