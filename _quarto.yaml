@@ -11,6 +11,8 @@ website:
         text: Home
       - href: eda.qmd
         text: EDA
+      - href: act.qmd
+        text: Laboratorio 1
  
 format:
   html:
