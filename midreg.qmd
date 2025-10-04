@@ -23,7 +23,8 @@ from sklearn.model_selection import train_test_split, learning_curve
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
-
+import ipywidgets as widgets
+from IPython.display import display
 ```
 
 1. Cargar la base de datos
@@ -108,4 +109,32 @@ El  $R^2$ nos dice que este modelo tiene un buen ajuste lineal de datos.
 
 9. Cómo pruebo con un dato nuevo. 
 
+
+
 ### Cuánto dinero necesito para hacer N casas? 
+
+
+```{python}
+n_input = widgets.FloatText(
+    value=None,
+    description='Casas:',
+    disabled=False
+)
+
+# Botón para ejecutar la predicción
+button = widgets.Button(description="Predecir")
+
+# Etiqueta para mostrar resultado
+output = widgets.Output()
+
+def predecir_costo(b):
+    with output:
+        output.clear_output()
+        n = n_input.value
+        pred = modelo.predict([[n]])[0]
+        print(f"Para construir {n:.0f} casas, se necesitan aproximadamente ${pred:,.2f}")
+
+button.on_click(predecir_costo)
+
+display(n_input, button, output)
+```
