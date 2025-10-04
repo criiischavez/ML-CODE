@@ -15,6 +15,10 @@ website:
         text: Laboratorio 1
       - href: classification.qmd
         text: Classification
+      - href: midreg.qmd
+        text: MidReg
+      - href: midcla.qmd
+        text: MidCla        
  
 format:
   html:

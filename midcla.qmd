@@ -1,0 +1,10 @@
+
+---
+title: "MidTerm - Linear Regression"
+format:
+  html:
+    code-fold: true
+    toc: true
+    number-sections: true
+    df-print: paged
+---
