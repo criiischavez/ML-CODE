@@ -9,4 +9,105 @@ engine: jupyter
 ---
 # Introducción 
 
-Enlace de Acceso. 
+Este modelo tiene como objetivo determinar cuando me cuesta hacer *n* casas de tipo proyecto vivienda pública en Ecuador. 
+
+La base de datos contiene 61 filas, esta fue modificada para tener el número de casas de tipo vivienda 1 y el costo de realización de ese conjunto de casas. 
+
+## Importar Bibliotecas
+```{python}
+## Bibliotecas importadas
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split, learning_curve
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
+import ipywidgets as widgets
+from IPython.display import display
+
+```
+
+1. Cargar la base de datos
+
+
+```{python}
+casas = pd.read_excel("Reg.xlsx")
+casas.head()
+```
+
+2. Dividir en entreamiento y prueba
+
+```{python}
+X = casas[['NV']]          # columna con el número de viviendas
+y = casas[['CT']]     # columna con el costo total    
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+```
+
+3. Entrenar el modelo
+
+
+```{python}
+modelo = LinearRegression()
+modelo.fit(X_train, y_train)
+```
+
+4. Predicciones.
+
+
+```{python}
+y_pred = modelo.predict(X_test)
+```
+
+5. Evaluación del modelo.
+
+
+```{python}
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Squared Error (MSE): {mse:.2f}")
+print(f"R² Score: {r2:.4f}")
+```
+
+6. Comparación de valores reales y predichos
+
+
+```{python}
+plt.figure()
+plt.scatter(y_test, y_pred)
+plt.xlabel("Valores reales")
+plt.ylabel("Valores predichos")
+plt.title("Comparación entre valores reales y predichos")
+plt.grid(True)
+plt.show()
+```
+
+7. Visualización de la curva de aprendizaje
+
+
+```{python}
+train_sizes, train_scores, test_scores = learning_curve(modelo, X, y, cv=5, scoring='r2')
+
+train_mean = np.mean(train_scores, axis=1)
+test_mean = np.mean(test_scores, axis=1)
+
+plt.figure()
+plt.plot(train_sizes, train_mean, label="Entrenamiento")
+plt.plot(train_sizes, test_mean, label="Validación")
+plt.xlabel("Tamaño del conjunto de entrenamiento")
+plt.ylabel("R² Score")
+plt.title("Curva de aprendizaje")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+8. Qué paso con el $R^2$?
+El  $R^2$ nos dice que este modelo tiene un buen ajuste lineal de datos. 
+
+9. Cómo pruebo con un dato nuevo. 
+
+### Cuánto dinero necesito para hacer N casas? 
