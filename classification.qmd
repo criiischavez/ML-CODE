@@ -1,8 +1,12 @@
 ---
 title: "Classification"
+format:
+  html:
+    code-fold: true
+    toc: true
+    number-sections: true
+    df-print: paged
 ---
-
-
 ```{python}
 
 from sklearn.datasets import load_breast_cancer
