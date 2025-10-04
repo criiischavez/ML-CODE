@@ -9,12 +9,6 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: eda.qmd
-        text: EDA
-      - href: act.qmd
-        text: Laboratorio 1
-      - href: classification.qmd
-        text: Classification
       - href: midreg.qmd
         text: MidReg
       - href: midcla.qmd
