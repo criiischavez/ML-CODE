@@ -107,34 +107,3 @@ plt.show()
 8. Qué paso con el $R^2$?
 El  $R^2$ nos dice que este modelo tiene un buen ajuste lineal de datos. 
 
-9. Cómo pruebo con un dato nuevo. 
-
-
-
-### Cuánto dinero necesito para hacer N casas? 
-
-
-```{python}
-n_input = widgets.FloatText(
-    value=None,
-    description='Casas:',
-    disabled=False
-)
-
-# Botón para ejecutar la predicción
-button = widgets.Button(description="Predecir")
-
-# Etiqueta para mostrar resultado
-output = widgets.Output()
-
-def predecir_costo(b):
-    with output:
-        output.clear_output()
-        n = n_input.value
-        pred = modelo.predict([[n]])[0]
-        print(f"Para construir {n:.0f} casas, se necesitan aproximadamente ${pred:,.2f}")
-
-button.on_click(predecir_costo)
-
-display(n_input, button, output)
-```
