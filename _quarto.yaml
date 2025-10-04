@@ -1,19 +1,13 @@
 project:
   type: website
-  output-dir: docs  # Cam
-  
- 
+
 website:
   title: "Machine Learning"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: midreg.qmd
-        text: MidReg
-      - href: midcla.qmd
-        text: MidCla        
- 
+
 format:
   html:
     theme: cosmo

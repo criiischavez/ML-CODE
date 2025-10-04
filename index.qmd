@@ -2,10 +2,10 @@
 title: 'Mi primer reporte en Quart'
 author: 'Cristina Chavez'
 date: '25-09-2025'
-format:
-    html:
-        embed-resources: true
-engine: jupyter
+#format:
+ #   html:
+  #      embed-resources: true
+#engine: jupyter
 ---
 # Grettings
 
