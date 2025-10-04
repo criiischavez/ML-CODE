@@ -1,6 +1,8 @@
 project:
   type: website
-
+  output-dir: docs
+  preview:
+    watch-inputs: true   # <- recarga al guardar
 website:
   title: "Machine Learning"
   navbar:
@@ -9,7 +11,8 @@ website:
         text: Home
       - href: midcla.qmd
         text: MidCla
-
+      - href: midreg.qmd
+        text: MidReg
 format:
   html:
     theme: cosmo
