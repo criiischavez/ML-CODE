@@ -9,8 +9,7 @@ website:
         text: Home
       - href: midcla.qmd
         text: MidCla
-      - href: midreg.qmd
-        text: MidReg
+
 format:
   html:
     theme: cosmo
