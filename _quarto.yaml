@@ -13,6 +13,8 @@ website:
         text: EDA
       - href: act.qmd
         text: Laboratorio 1
+      - href: classification.qmd
+        text: Classification
  
 format:
   html:
