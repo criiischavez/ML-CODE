@@ -15,23 +15,108 @@ En una base de datos me explica cuales son los tipos de empresa: Micro, Pequeña
 
 En otra base de datos, me da la cantidad de empleados y las ventas por año, pero no me dice que tipo de empresa es. 
 
-Entonces tome los datos de la segunda base para etiquetarlos en base a las condiciones del tipo de empresa que me enseña en la primera base de datos. 
-
-Observaciones importantes. A más de las etiquetas de Micro, Pequeñas, Medianas y Grandes (En Ingles), existen las etiquetas: 
-- No Info. Que refiera a que las empresas cuentan con 0 empleados y 0 ganancias; no brindan información. 
-- Other. La cantidad de empleados y las ventas al año no coinciden con los parámetros definidos para el tipo de empresa; entonces las empresas presentan información no acorde. 
+Entonces, 
+0 - Empresas con ventas para definirse como: MicroEmpresas, pequeñas y medianas empresas
+1 - Empresas con ventas para definirse como grandes empresas.
 
 Importar librerías
 
 ```{python}
 import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, f1_score,
+    confusion_matrix, roc_curve, roc_auc_score
+)
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_curve, auc
-
 
 ```
 
+1. Leer los datos
+
+```{python}
+lab = pd.read_excel("Class.xlsx")
+lab.head()
+```
+
+2. Separar variables
+
+```{python}
+# Variables predictoras y variable objetivo
+X = lab[["Vent"]]
+y = lab["Lab"]
+```
+
+3. División
+
+
+```{python}
+# División en entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+```
+
+4. Modelado
+
+
+```{python}
+modelo = LogisticRegression()
+modelo.fit(X_train, y_train)
+```
+
+5. Predicción
+
+
+```{python}
+y_pred = modelo.predict(X_test)
+y_prob = modelo.predict_proba(X_test)[:,1]
+```
+
+6. Métricas.
+
+
+```{python}
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+
+
+print("=== Métricas del modelo ===")
+print(f"Accuracy:  {accuracy:.3f}")
+print(f"Precision: {precision:.3f}")
+print(f"Recall:    {recall:.3f}")
+print(f"F1 Score:  {f1:.3f}")
+```
+
+7. Matriz de Confusión.
+
+
+```{python}
+cm = confusion_matrix(y_test, y_pred)
+fig, ax = plt.subplots(figsize=(5, 4))
+im = ax.imshow(cm, interpolation='nearest')
+ax.set_title("Matriz de Confusión")
+ax.set_xlabel("Predicción")
+ax.set_ylabel("Real")
+ax.set_xticks([0, 1])
+ax.set_yticks([0, 1])
+for (i, j), val in np.ndenumerate(cm):
+    ax.text(j, i, int(val), ha='center', va='center')
+plt.colorbar(im)
+plt.tight_layout()
+plt.show()
+```
+
+# Empezamos con el PIPELiNE
+
+
+
+
+
+```
