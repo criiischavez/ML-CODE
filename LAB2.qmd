@@ -1,0 +1,248 @@
+---
+title: 'Laboratorio 2'
+author: 'Cristina Chavez'
+date: '25-09-2025'
+format:
+    html:
+        embed-resources: true
+
+---
+
+## Introducción
+
+Este laboratorio tiene como objetivo realizar el preprocesamiento para tareas de clasificación a partir de un dataset de tweets, enfocandose en: 
+
+- Creación fundamentada del target. Considerar cual de las columnas del dataset representa una categoría o define un sentimiento
+- Codificación de las variables categóricas. Tratamiento para las variables no numéricas.
+- Vectorización del Texto. El texto es una forma de datos no estructurados y hay que tratarlos
+- Analisis de los resultados del modelo con matriz de confusión y métricas de clasificación. Evaluación del desempeño
+
+## Librerías necesarias
+
+```{python}
+import pandas as pd
+import re
+import numpy as np
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
+```
+
+
+## Importar los datos
+
+```{python}
+url = "https://raw.githubusercontent.com/erickedu85/dataset/refs/heads/master/tweets/tweets_totales_con_sentimiento_ml.csv"
+
+```
+
+```{python}
+
+df = pd.read_csv(url)
+df.head()
+```
+
+En lo personal, .info() siento que me brinda información un poco más relevante
+```{python}
+df.info()
+```
+
+### Qué puedo decir de esto.
+
+
+Tengo 25 columnas, 
+- No me sirven las columnas: 0, 1, 4, 6,7,8,10,11,12,13,16,17,18,21,22
+
+¿Me interesan las menciones y los hastags?
+
+- Me sirven las columnas: 
+-- Content. Debe ser la base del análisis.
+-- isReply. Si es que el twit tuvo impacto
+-- createdAt. En que momento habían más twits, mientras más nos acercabamos a las elecciones. 
+-- authorVerified. Probabilidades de que el perfil no sea un boot. 
+-- time_response. Puedo ver cuanto tiempo se demoran escribiendo un Twit, según la cantidad de caracteres.
+-- account_age_days. Puedo medir la confianza del twit con el tiempo de vida de la cuenta 
+-- Content_length. el largo del twit 
+--has_profile_picture. Tiene foto de perfil, puede ser probable que sea confiable. 
+-- sentiment_polarity. Feliz, triste.
+
+
+```{python}
+df = df.drop(df.columns[[0, 1, 4, 6, 7, 8, 10, 11, 12, 13, 16, 17, 18, 21, 22]], axis=1)
+
+df.info()
+```
+
+## Y el target?
+
+
+En este dataset podemos aprovechar la información sobre la polaridad del sentimiento. 
+
+Idea: Podríamos definir etiquetas pro_luisa o pro_daniel, si asumimos que un @luis con sentimiento positivo es pro luisa, y lo contrario, pro_daniel
+
+**Por ahora lo que podemos hacer es aprovechar el target del sentimiento** porque de alguna y ver como influyen las variables que consideré importantes. 
+
+
+### El target como categorías:
+
+
+
+```{python}
+df['sentiment_label'] = np.select(
+    [
+        df['sentiment_polarity'] > 0,
+        df['sentiment_polarity'] < 0
+    ],
+    ['positivo', 'negativo'],
+    default='neutro'
+)
+
+# Ver la distribución de clases
+df['sentiment_label'].value_counts()
+```
+
+
+```{python}
+sns.countplot(data=df, x='sentiment_label', palette='coolwarm',
+              order=df['sentiment_label'].value_counts().index)
+plt.title('Distribución de Sentimientos')
+plt.xlabel('Clase de sentimiento')
+plt.ylabel('Cantidad de tweets')
+plt.show()
+```
+
+**El dataset con los valores de sentimiento esta más de desvalanceado, elegimos otro camino*
+
+
+Elimino la columna de analisis sentimental, porque no considero util.
+
+
+```{python}
+df = df.drop(df.columns[[0, 2, 4,5, 10]], axis=1)
+
+df.info()
+```
+
+### Solución. 
+
+Creamos una etiqueta que defina cual es un bot y cual no con el siguiente argumento:
+- Una cuenta no verificada, sin foto de perfil, muy nueva y que responde muy rapido es un bot (1)
+- Las demás cuentas son reales (0)
+
+```{python}
+# Crear etiqueta "bot" según condiciones heurísticas
+df['bot_label'] = (
+    (df['account_age_days'] < 500) &
+    (df['time_response'] < 800)
+).astype(int)
+
+# Revisar distribución
+print(df['bot_label'].value_counts())
+```
+
+Verificación visual
+```{python}
+sns.countplot(data=df, x='bot_label', palette='Set2')
+plt.title('Distribución de Cuentas - Bot (1) vs Real (0)')
+plt.xlabel('Clase')
+plt.ylabel('Cantidad de cuentas')
+plt.show()
+```
+
+```{python}
+df['time_response'].describe()
+```
+
+```{python}
+
+# Seleccionar variables numéricas
+num_cols = ['account_age_days', 'time_response', 'content_length']
+
+# Crear histogramas para cada variable numérica
+for col in num_cols:
+    plt.figure(figsize=(6,4))
+    sns.histplot(df[col], kde=True, color='steelblue', edgecolor='black')
+    plt.title(f'Distribución de {col}')
+    plt.xlabel(col)
+    plt.ylabel('Frecuencia')
+    plt.tight_layout()
+    plt.show()
+```
+
+## Modelo 
+
+```{python}
+# === Variables predictoras y target ===
+X = df[['isReply', 'has_profile_picture', 'account_age_days',
+        'time_response', 'content_length']]
+y = df['bot_label']
+
+# === División entrenamiento / prueba ===
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
+```
+
+
+
+```{python}
+# === Preprocesamiento ===
+num_cols = ['account_age_days', 'time_response', 'content_length']
+cat_cols = ['isReply', 'has_profile_picture']
+
+preprocessor = ColumnTransformer([
+    ('num', StandardScaler(), num_cols),
+    ('cat', OneHotEncoder(drop='if_binary'), cat_cols)
+])
+
+# === Pipeline con modelo RandomForest ===
+model = Pipeline([
+    ('pre', preprocessor),
+    ('clf', RandomForestClassifier(
+        n_estimators=200,
+        random_state=42,
+        class_weight='balanced'
+    ))
+])
+```
+
+
+```{python}
+# === Entrenamiento ===
+model.fit(X_train, y_train)
+```
+
+
+```{python}
+# === Predicciones ===
+y_pred = model.predict(X_test)
+```
+
+
+```{python}
+# === Evaluación ===
+print("=== Reporte de Clasificación ===")
+print(classification_report(y_test, y_pred, digits=3))
+```
+
+
+```{python}
+# === Matriz de confusión ===
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=['Real (0)', 'Bot (1)'],
+            yticklabels=['Real (0)', 'Bot (1)'])
+plt.title('Matriz de Confusión - Clasificación de Cuentas')
+plt.xlabel('Predicción')
+plt.ylabel('Valor Real')
+plt.tight_layout()
+plt.show()
+```

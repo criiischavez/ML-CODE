@@ -9,10 +9,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: midcla.qmd
-        text: MidCla
-      - href: midreg.qmd
-        text: MidReg
+      - href: LAB2.qmd
+        text: Laboratorio 2
 format:
   html:
     theme: cosmo
