@@ -9,8 +9,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: LAB2.qmd
-        text: Laboratorio 2
+      - href: PF.qmd
+        text: PROYECTO FINAL
 format:
   html:
     theme: cosmo
