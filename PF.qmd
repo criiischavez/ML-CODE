@@ -14,7 +14,7 @@ Este proyecto final tiene como objetivo aplicar todos los conocimientos adquirid
 
 El Dataset corresponde a una base de datos de twitter Ecuador en realación a las elecciones presidenciales, para poder enseñarle a la máquina fue necesario realizar un análisis sentimental con ayuda de una API denominada PRESPECTIVE disponible en google cloud.
 
-## Librerías necesarias
+- Librerías necesarias
 
 
 ```{python}
@@ -60,7 +60,7 @@ from sklearn.cluster import KMeans
 ```
 
 
-## Importar los datos
+- Importar los datos
 
 El data set esta disponible en el repositorio del docente, por lo que es necesario importar el dataset desde una url.
 ```{python}
@@ -311,7 +311,7 @@ plt.show()
 
 ## CLASIFICACIÓN
 
-Modelo: K-nn
+### Modelo: K-nn
 
 
 Primero se deben transformar los valores de Toxicity a Categorías. 
@@ -456,7 +456,7 @@ En base a la curv a ROC se puede interpretar, que el modelo tiene una baja capac
 
 Es muy probable que entre el texto y las variables numéricas no se establezca una relación clara.
 
-## REGRESION LINEAL
+### REGRESION LINEAL
 
 Ahora con ayuda de una regresión lineal se considera predecir un toxicity_score
 
@@ -589,7 +589,7 @@ En la gráfica de Residuales vs Predichos se observa como los puntos tienen una 
 *No olvidar que si el modelo fuera correcto los valores deberían verse distribuidos aleatoriamente.*
 
 
-## CLUSTERING
+### CLUSTERING
 
 El clustering es un tipo de herramienta que nos permite agrupar, por lo que es aplicable a los datos disponibles. 
 
